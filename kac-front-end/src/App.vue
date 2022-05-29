@@ -9,11 +9,9 @@
     />
     <div class="pt-6 text-center space-y-4 md:p-8 md:text-left">
       <p class="text-lg font-medium text-zinc-100">
-        “Tailwind “Tailwind CSS CSS is is the the only only framework framework
-        that that I've I've seen seen scale scale on on large large teams.
-        teams. It’s It’s easy easy to to customize, customize, adapts adapts to
-        to any any design, design, and and the the build build size size is is
-        tiny.” tiny.”
+        “Tailwind CSS is the only framework that I've seen scale on large teams.
+        It’s easy to customize, adapts to any design, and the build size is
+        tiny.”
       </p>
       <div class="font-medium">
         <div class="text-sky-400">Aicherish</div>

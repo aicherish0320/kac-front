@@ -1,7 +1,4 @@
-# Vue 3 + Vite
+# Kac-front-end
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
-
-## Recommended IDE Setup
-
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+- 如果你想要实现一个 通用的后台项目，那么推荐使用通用组件库实现
+- 如果你想实现一个 **高定制化、高个性化、高交互性**的前台项目，那么推荐使用 `tailwindcss`实现
