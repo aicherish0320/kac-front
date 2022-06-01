@@ -1,24 +1,9 @@
-<script setup></script>
+<script setup>
+import { isMobileTerminal } from './utils/flexible'
+</script>
 
 <template>
-  <div class="bg-slate-800 rounded-xl p-8 md:flex md:p-0">
-    <img
-      class="w-24 h-24 round-full mx-auto md:w-48 md:h-auto md:rounded-none"
-      src="./assets/logo.png"
-      alt="logo"
-    />
-    <div class="pt-6 text-center space-y-4 md:p-8 md:text-left">
-      <p class="text-lg font-medium text-zinc-100">
-        “Tailwind CSS is the only framework that I've seen scale on large teams.
-        It’s easy to customize, adapts to any design, and the build size is
-        tiny.”
-      </p>
-      <div class="font-medium">
-        <div class="text-sky-400">Aicherish</div>
-        <div class="text-slate-500">中前台前端解决方案</div>
-      </div>
-    </div>
-  </div>
+  <div>{{ isMobileTerminal }}</div>
 </template>
 
 <style></style>
