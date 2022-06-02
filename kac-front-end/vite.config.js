@@ -1,19 +1,20 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import { join } from 'path'
+import path from 'path'
 
 export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      '@': join(__dirname, 'src')
+      '@': path.join(__dirname, 'src')
     }
   },
   server: {
     proxy: {
       '/api': {
-        target: 'https://api.imooc-front.lgdsunday.club',
-        changeOrigin: true
+        target: 'http://localhost:7001/',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, '')
       }
     }
   }
