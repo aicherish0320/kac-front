@@ -2,6 +2,14 @@
   <div>我是移动端下的 navigation</div>
 </template>
 
-<script setup></script>
+<script setup>
+import { getCategory } from '@/api/category'
+
+const getCategoryData = async () => {
+  const res = await getCategory()
+  console.log('res >>> ', res)
+}
+getCategoryData()
+</script>
 
 <style lang="scss" scoped></style>
