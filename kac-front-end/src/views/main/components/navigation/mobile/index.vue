@@ -30,17 +30,14 @@
     </ul>
   </div>
   <Popup v-model="isVisible">
-    <p>hello</p>
-    <p>hello</p>
-    <p>hello</p>
-    <p>hello</p>
-    <p>hello</p>
+    <Menu :categories="data" @onItemClick="onItemClick"></Menu>
   </Popup>
 </template>
 
 <script setup>
 import { useScroll } from '@vueuse/core'
 import { onBeforeUpdate, ref, watch } from 'vue'
+import Menu from '@/views/main/components/menu/index.vue'
 
 // vite 构建的项目中，可以直接使用 defineProps 方法
 defineProps({
@@ -76,7 +73,6 @@ const { x: ulScrollLeft } = useScroll(ulTarget)
 // watch
 watch(currentCategoryIndex, (val) => {
   const { left, width } = itemRefs[val].getBoundingClientRect()
-  console.log('left >>> ', left, ulScrollLeft.value)
 
   sliderStyle.value = {
     // 划款的位置 = ul 横向滚动的位置 + 当前元素 left - ul 的 padding
@@ -88,6 +84,7 @@ watch(currentCategoryIndex, (val) => {
 // item 点击事件
 const onItemClick = (index) => {
   currentCategoryIndex.value = index
+  isVisible.value = false
 }
 // 控制 popup 展示
 const isVisible = ref(false)
