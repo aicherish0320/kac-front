@@ -13,6 +13,7 @@
       <!-- 汉堡按钮 -->
       <li
         class="fixed top-0 right-[-1px] h-4 px-1 flex items-center bg-white z-20 shadow-l-white"
+        @click="onShowPopup"
       >
         <SvgIcon class="w-1.5 h-1.5" name="hamburger"></SvgIcon>
       </li>
@@ -28,6 +29,13 @@
       </li>
     </ul>
   </div>
+  <Popup v-model="isVisible">
+    <p>hello</p>
+    <p>hello</p>
+    <p>hello</p>
+    <p>hello</p>
+    <p>hello</p>
+  </Popup>
 </template>
 
 <script setup>
@@ -80,6 +88,11 @@ watch(currentCategoryIndex, (val) => {
 // item 点击事件
 const onItemClick = (index) => {
   currentCategoryIndex.value = index
+}
+// 控制 popup 展示
+const isVisible = ref(false)
+const onShowPopup = () => {
+  isVisible.value = true
 }
 </script>
 
