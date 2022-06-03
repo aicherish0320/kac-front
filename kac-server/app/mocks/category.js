@@ -4,7 +4,7 @@ module.exports = {
   success: true,
   code: 200,
   data: {
-    categorys: [
+    categories: [
       { id: 'web_app_icon', name: 'UI/UX', col: 1, urlname: 'web_app_icon' },
       { id: 'design', name: '平面', col: 1, urlname: 'design' },
       {
