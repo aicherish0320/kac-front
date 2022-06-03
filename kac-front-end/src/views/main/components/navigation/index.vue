@@ -9,12 +9,14 @@ import PcNavigation from './pc/index.vue'
 
 import { getCategory } from '@/api/category'
 import { ref } from '@vue/reactivity'
+import { ALL_CATEGORY_ITEM } from '@/constants'
 
 const categoryData = ref([])
 
 const getCategoryData = async () => {
   const { categories } = await getCategory()
   categoryData.value = categories
+  categoryData.value.unshift(ALL_CATEGORY_ITEM)
 }
 getCategoryData()
 </script>

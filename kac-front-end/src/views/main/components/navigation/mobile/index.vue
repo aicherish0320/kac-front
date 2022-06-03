@@ -44,7 +44,7 @@ defineProps({
 
 const sliderStyle = ref({
   transform: 'translateX(0px)',
-  width: '60px'
+  width: '50px'
 })
 
 // 选中 item 下表
@@ -68,6 +68,8 @@ const { x: ulScrollLeft } = useScroll(ulTarget)
 // watch
 watch(currentCategoryIndex, (val) => {
   const { left, width } = itemRefs[val].getBoundingClientRect()
+  console.log('left >>> ', left, ulScrollLeft.value)
+
   sliderStyle.value = {
     // 划款的位置 = ul 横向滚动的位置 + 当前元素 left - ul 的 padding
     transform: `translateX(${ulScrollLeft.value + left - 10}px)`,
