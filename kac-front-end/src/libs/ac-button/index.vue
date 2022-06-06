@@ -1,12 +1,39 @@
 <template>
   <button
     class="text-sm text-center rounded duration-150 flex justify-center items-center"
-    :class="[typeEnum[type], sizeEnum[sizeKey].button]"
-  ></button>
+    :class="[
+      typeEnum[type],
+      sizeEnum[sizeKey].button,
+      {
+        'active: scale-105': isActiveAnim
+      }
+    ]"
+    @click.stop="onBtnClick"
+  >
+    <!-- loading -->
+    <SvgIcon
+      v-if="loading"
+      name="loading"
+      class="w-2 h-2 animate-spin mr-1"
+    ></SvgIcon>
+    <!-- icon -->
+    <SvgIcon
+      v-if="icon"
+      :name="icon"
+      class="m-auto"
+      :class="sizeEnum[sizeKey].icon"
+      :color="iconColor"
+      :fillClass="iconClass"
+    ></SvgIcon>
+    <!-- 文字按钮 -->
+    <slot v-else></slot>
+  </button>
 </template>
 
 <script>
 import { computed } from 'vue-demi'
+
+const EMITS_CLICK = 'click'
 
 // type 可选项：表示按钮风格
 const typeEnum = {
@@ -85,14 +112,21 @@ const props = defineProps({
   // 加载动画
   loading: {
     type: Boolean,
-    default: true
+    default: false
   }
 })
+
+const emits = defineEmits([EMITS_CLICK])
 
 // props.size
 const sizeKey = computed(() => {
   return props.icon ? `icon-${props.size}` : props.size
 })
+
+const onBtnClick = () => {
+  if (props.loading) return
+  emits(EMITS_CLICK)
+}
 </script>
 
 <style lang="scss" scoped></style>
