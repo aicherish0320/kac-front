@@ -1,5 +1,6 @@
 <template>
   <MobileNavigationVue v-if="isMobileTerminal" />
+  <PcNavigation v-else />
 </template>
 
 <script setup>
@@ -10,13 +11,6 @@ import { useStore } from 'vuex'
 
 const store = useStore()
 store.dispatch('category/useCategoryData')
-
-// const getCategoryData = async () => {
-//   const { categories } = await getCategory()
-//   categoryData.value = categories
-//   categoryData.value.unshift(ALL_CATEGORY_ITEM)
-// }
-// getCategoryData()
 </script>
 
 <style lang="scss" scoped></style>
