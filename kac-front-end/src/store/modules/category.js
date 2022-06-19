@@ -1,10 +1,10 @@
 import { getCategory } from '@/api/category'
-import { ALL_CATEGORY_ITEM } from '@/constants'
+import { ALL_CATEGORY_ITEM, CATEGORY_NOMAR_DATA } from '@/constants'
 
 export default {
   namespaced: true,
   state: () => ({
-    categories: [ALL_CATEGORY_ITEM]
+    categories: CATEGORY_NOMAR_DATA
   }),
   mutations: {
     setCategories(state, newCategories) {
