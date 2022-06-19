@@ -3,7 +3,7 @@
     <h2 class="text-xl text-zinc-900 font-bold mb-2 px-1">所有分类</h2>
     <ul class="overflow-y-scroll">
       <li
-        v-for="(item, index) in categories"
+        v-for="(item, index) in $store.getters.categories"
         :key="item.id"
         class="text-lg text-zinc-900 px-1 py-1.5 duration-100 active:bg-zinc-100"
         @click="$emit('onItemClick', index)"
@@ -15,12 +15,6 @@
 </template>
 
 <script setup>
-defineProps({
-  categories: {
-    type: Array,
-    required: true
-  }
-})
 // 推荐，所有的事件都进行注册
 defineEmits(['onItemClick'])
 </script>

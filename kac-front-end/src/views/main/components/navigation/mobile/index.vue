@@ -18,7 +18,7 @@
         <SvgIcon class="w-1.5 h-1.5" name="hamburger"></SvgIcon>
       </li>
       <li
-        v-for="(item, index) in data"
+        v-for="(item, index) in $store.getters.categories"
         :key="item.id"
         class="shrink-0 px-1.5 py-0.5 z-10 duration-200 last:mr-4"
         :class="{ 'text-zinc-100': currentCategoryIndex === index }"
@@ -30,7 +30,7 @@
     </ul>
   </div>
   <Popup v-model="isVisible">
-    <Menu :categories="data" @onItemClick="onItemClick"></Menu>
+    <Menu @onItemClick="onItemClick"></Menu>
   </Popup>
 </template>
 
@@ -38,14 +38,6 @@
 import { useScroll } from '@vueuse/core'
 import { onBeforeUpdate, ref, watch } from 'vue'
 import Menu from '@/views/main/components/menu/index.vue'
-
-// vite 构建的项目中，可以直接使用 defineProps 方法
-defineProps({
-  data: {
-    type: Array,
-    required: true
-  }
-})
 
 const sliderStyle = ref({
   transform: 'translateX(0px)',

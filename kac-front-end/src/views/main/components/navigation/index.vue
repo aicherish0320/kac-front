@@ -1,24 +1,22 @@
 <template>
-  <MobileNavigationVue v-if="isMobileTerminal" :data="categoryData" />
+  <MobileNavigationVue v-if="isMobileTerminal" />
 </template>
 
 <script setup>
 import { isMobileTerminal } from '@/utils/flexible'
 import MobileNavigationVue from './mobile/index.vue'
 import PcNavigation from './pc/index.vue'
+import { useStore } from 'vuex'
 
-import { getCategory } from '@/api/category'
-import { ref } from '@vue/reactivity'
-import { ALL_CATEGORY_ITEM } from '@/constants'
+const store = useStore()
+store.dispatch('category/useCategoryData')
 
-const categoryData = ref([])
-
-const getCategoryData = async () => {
-  const { categories } = await getCategory()
-  categoryData.value = categories
-  categoryData.value.unshift(ALL_CATEGORY_ITEM)
-}
-getCategoryData()
+// const getCategoryData = async () => {
+//   const { categories } = await getCategory()
+//   categoryData.value = categories
+//   categoryData.value.unshift(ALL_CATEGORY_ITEM)
+// }
+// getCategoryData()
 </script>
 
 <style lang="scss" scoped></style>
