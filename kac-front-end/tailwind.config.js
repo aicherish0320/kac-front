@@ -1,4 +1,6 @@
 module.exports = {
+  // 手动切换暗黑模式
+  darkMode: 'class',
   // tailwind 应用范围
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   theme: {
