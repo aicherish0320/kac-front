@@ -7,7 +7,7 @@
       <div
         v-show="isVisible"
         ref="contentTarget"
-        class="absolute p-1 z-20 bg-white border rounded-md"
+        class="absolute p-1 z-20 dark:bg-zinc-900 bg-white border dark:border-zinc-700 rounded-md"
         :style="contentStyle"
       >
         <slot></slot>
