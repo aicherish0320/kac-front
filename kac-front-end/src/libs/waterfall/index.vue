@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 const props = defineProps({
   data: {
@@ -61,6 +61,34 @@ const useColumnHeightObj = () => {
 }
 
 const containerTarget = ref(null)
+const containerWidth = ref(0)
+const containerLeft = ref(0)
+const useContainerWidth = () => {
+  const { paddingLeft, paddingRight } = getComputedStyle(
+    containerTarget.value,
+    null
+  )
+  containerLeft.value = parseFloat(paddingLeft)
+
+  containerWidth.value =
+    containerTarget.value.offsetWidth -
+    parseFloat(paddingLeft) -
+    parseFloat(paddingRight)
+}
+
+const columnWidth = ref(0)
+const columnSpacingTotal = computed(() => {
+  return (props.column - 1) * props.columnSpacing
+})
+const useColumnWidth = () => {
+  useContainerWidth()
+  columnWidth.value =
+    (containerWidth.value - columnSpacingTotal.value) / props.column
+}
+
+onMounted(() => {
+  useColumnWidth()
+})
 </script>
 
 <style lang="scss" scoped></style>
