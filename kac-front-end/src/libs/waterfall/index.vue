@@ -12,7 +12,7 @@
         :style="{
           width: columnWidth + 'px',
           left: item._style?.left + 'px',
-          top: item._style?.right + 'px'
+          top: item._style?.top + 'px'
         }"
       >
         <slot :item="item" :width="columnWidth" :index="index"></slot>
@@ -23,8 +23,15 @@
 </template>
 
 <script setup>
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
-import { getAllImg, getImgElements, onCompleteImgs } from './utils'
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
+import {
+  getAllImg,
+  getImgElements,
+  getMaxHeight,
+  getMinHeight,
+  getMinHeightColumn,
+  onCompleteImgs
+} from './utils'
 
 const props = defineProps({
   data: {
@@ -115,12 +122,42 @@ const useItemHeight = () => {
   useItemLocation()
 }
 const useItemLocation = () => {
-  console.log('itemHeights >>> ', itemHeights)
+  props.data.forEach((item, index) => {
+    if (item._style) {
+      return
+    }
+    item._style = {}
+    item._style.left = getItemLeft()
+    item._style.top = getItemTop()
+    // 指定的列高度自增
+    increasingHeight(index)
+  })
+  containerHeight.value = getMaxHeight(columnHeightObj.value)
+}
+
+const getItemLeft = () => {
+  const column = getMinHeightColumn(columnHeightObj.value)
+  return (
+    column * (columnWidth.value + props.columnSpacing) + containerLeft.value
+  )
+}
+const getItemTop = () => {
+  return getMinHeight(columnHeightObj.value)
+}
+
+const increasingHeight = (index) => {
+  const minHeightColumn = getMinHeightColumn(columnHeightObj.value)
+  columnHeightObj.value[minHeightColumn] +=
+    itemHeights[index] + props.rowSpacing
 }
 
 watch(
   () => props.data,
   (newVal) => {
+    const resetColumnHeight = newVal.every((item) => !item._style)
+    if (resetColumnHeight) {
+      useColumnHeightObj()
+    }
     nextTick(() => {
       if (props.picturePreReading) {
         waitImgComplete()
@@ -134,6 +171,12 @@ watch(
     immediate: true
   }
 )
+
+onUnmounted(() => {
+  props.data.forEach((item) => {
+    delete item._style
+  })
+})
 </script>
 
 <style lang="scss" scoped></style>

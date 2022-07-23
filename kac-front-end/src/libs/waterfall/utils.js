@@ -26,3 +26,22 @@ export const onCompleteImgs = (imgs) => {
   })
   return Promise.all(promiseAll)
 }
+
+export const getMinHeight = (columnHeightObj) => {
+  const columnHeightArr = Object.values(columnHeightObj)
+
+  return Math.min(...columnHeightArr)
+}
+
+export const getMaxHeight = (columnHeightObj) => {
+  const columnHeightArr = Object.values(columnHeightObj)
+  return Math.max(...columnHeightArr)
+}
+
+export const getMinHeightColumn = (columnHeightObj) => {
+  const minHeight = getMinHeight(columnHeightObj)
+
+  return Object.keys(columnHeightObj).find((key) => {
+    return columnHeightObj[key] === minHeight
+  })
+}
