@@ -4,7 +4,7 @@
       :data="pexelsList"
       nodeKey="id"
       :column="5"
-      :picturePreReading="true"
+      :picturePreReading="false"
     >
       <template v-slot="{ item }">
         <ItemVue :data="item"> </ItemVue>

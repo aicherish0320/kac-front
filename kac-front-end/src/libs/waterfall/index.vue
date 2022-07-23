@@ -23,7 +23,8 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { getAllImg, getImgElements, onCompleteImgs } from './utils'
 
 const props = defineProps({
   data: {
@@ -89,6 +90,50 @@ const useColumnWidth = () => {
 onMounted(() => {
   useColumnWidth()
 })
+
+let itemHeights = []
+// 监听图片加载完成（需要图片预加载）
+const waitImgComplete = () => {
+  itemHeights = []
+  let itemElements = [...document.getElementsByClassName('m-waterfall-item')]
+  const imgElements = getImgElements(itemElements)
+  const allImgs = getAllImg(imgElements)
+
+  onCompleteImgs(allImgs).then(() => {
+    itemElements.forEach((el) => {
+      itemHeights.push(el.offsetHeight)
+    })
+    useItemLocation()
+  })
+}
+const useItemHeight = () => {
+  itemHeights = []
+  let itemElements = [...document.getElementsByClassName('m-waterfall-item')]
+  itemElements.forEach((el) => {
+    itemHeights.push(el.offsetHeight)
+  })
+  useItemLocation()
+}
+const useItemLocation = () => {
+  console.log('itemHeights >>> ', itemHeights)
+}
+
+watch(
+  () => props.data,
+  (newVal) => {
+    nextTick(() => {
+      if (props.picturePreReading) {
+        waitImgComplete()
+      } else {
+        useItemHeight()
+      }
+    })
+  },
+  {
+    deep: true,
+    immediate: true
+  }
+)
 </script>
 
 <style lang="scss" scoped></style>
